@@ -11,6 +11,7 @@ export class MarketDataComponent implements OnInit {
   priceList: any[] = [];
   currentIndex = 0;
   pageNumber = 1;
+  isLoading: boolean = true; // Initialize as true to show the spinner
 
   constructor(private marketDataService: MarketDataService) {}
 
@@ -20,6 +21,7 @@ export class MarketDataComponent implements OnInit {
       this.marketData = data.data;
       this.priceList = this.marketData.reverse();
       this.updateColors();
+      this.isLoading = false; // Data is loaded, set isLoading to false
     });
   }
 
