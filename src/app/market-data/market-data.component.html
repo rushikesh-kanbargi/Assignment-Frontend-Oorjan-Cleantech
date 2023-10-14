@@ -1,0 +1,26 @@
+<div class="center">
+  <h1 class="header">Stock Market Data</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th><b>Date</b></th>
+        <th *ngFor="let entry of priceList.slice(0,7); let i = index">{{ entry.date | date:'mediumDate' }}</th>
+      </tr>
+    </thead>
+    <tr>
+      <td><b>Open</b></td>
+      <td *ngFor="let entry of priceList.slice(0,7);" id="open" [ngStyle]="{'color': entry.openColor}">{{ entry.open }}</td>
+    </tr>
+    <tr>
+      <td><b>Close</b></td>
+      <td *ngFor="let entry of priceList.slice(0,7);" id="close" [ngStyle]="{'color': entry.closeColor}">{{ entry.close }}</td>
+    </tr>
+    <tr>
+      <td><b>Day's <br> High & Low</b></td>
+      <td *ngFor="let entry of priceList.slice(0,7);" id="close">High: {{ entry.high }} <br> Low: {{ entry.low }}</td>
+    </tr>
+  </table>
+  <button class="previous-button" (click)="previousPage()" [disabled]="currentIndex === 0" *ngIf="!(currentIndex === 0)">Prev Data</button>
+  <span class="p1">{{ pageNumber }} / {{ marketData.length / 7 }}</span>
+  <button class="next-button" (click)="nextPage()" [disabled]="currentIndex + 7 >= marketData.length" *ngIf="!(currentIndex + 7 >= marketData.length)">Next Data</button>
+</div>
