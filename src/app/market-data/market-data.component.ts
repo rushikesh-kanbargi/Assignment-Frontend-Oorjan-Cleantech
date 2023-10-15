@@ -12,6 +12,7 @@ export class MarketDataComponent implements OnInit {
   currentIndex = 0;
   pageNumber = 1;
   isLoading: boolean = true; // Initialize as true to show the spinner
+  errorMessage: string = ''; // Store error messages
 
   constructor(private marketDataService: MarketDataService) {}
 
@@ -22,6 +23,10 @@ export class MarketDataComponent implements OnInit {
       this.priceList = this.marketData.reverse();
       this.updateColors();
       this.isLoading = false; // Data is loaded, set isLoading to false
+    },
+    (error) => {
+      this.errorMessage = 'Error loading data. Please try again later.';
+      this.isLoading = false; // Data loading failed, set isLoading to false
     });
   }
 
@@ -50,6 +55,7 @@ export class MarketDataComponent implements OnInit {
   /* The code block is iterating over each element in the `priceList` array using the `forEach` method. For each element, it checks if the index is greater than 0. If it is, it compares the
   opening price of the current day with the closing price of the previous day. Based on the comparison, it assigns a color */
   updateColors() {
+    this.errorMessage = ''; // Clear any previous error messages
     this.priceList.forEach((day, index) => {
 
       if (index > 0) {
