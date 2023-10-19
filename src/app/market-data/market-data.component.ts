@@ -25,7 +25,8 @@ export class MarketDataComponent implements OnInit {
       this.isLoading = false; // Data is loaded, set isLoading to false
     },
     (error) => {
-      this.errorMessage = 'Error loading data. Please try again later.';
+      alert(error)
+      this.errorMessage = error;
       this.isLoading = false; // Data loading failed, set isLoading to false
     });
   }
